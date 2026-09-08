@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ms-product
+
+  main:
+    banner-mode: off
