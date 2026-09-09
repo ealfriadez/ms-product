@@ -9,6 +9,7 @@ import pe.edu.ufv.msproduct.configuration.error.ResourceNotFoundException;
 import pe.edu.ufv.msproduct.model.dto.ProductCreateRequestDto;
 import pe.edu.ufv.msproduct.model.dto.ProductResponseDto;
 import pe.edu.ufv.msproduct.model.dto.ProductUpdateRequestDto;
+import pe.edu.ufv.msproduct.model.dto.ProductUpdateStockRequestDto;
 import pe.edu.ufv.msproduct.model.entity.CategoryEntity;
 import pe.edu.ufv.msproduct.model.entity.DeletedProduct;
 import pe.edu.ufv.msproduct.model.entity.ProductEntity;
@@ -84,7 +85,7 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductResponseDto updateStock(Long id, ProductUpdateRequestDto productRequest, int port) {
+    public ProductResponseDto updateStock(Long id, ProductUpdateStockRequestDto productRequest, int port) {
 
         log.info("updateStock");
         ProductEntity productEntity = getProductById(id);
@@ -109,7 +110,7 @@ public class ProductService {
     private ProductEntity getProductById(Long id) {
         Optional<ProductEntity> productEntityOptional = repository.findById(id)
                 .filter(p -> p.getDeleted() == DeletedProduct.CREATED);
-        if (!productEntityOptional.isPresent()) {
+        if (productEntityOptional.isEmpty()) {
             throw new ResourceNotFoundException("Resource not found");
         }
 

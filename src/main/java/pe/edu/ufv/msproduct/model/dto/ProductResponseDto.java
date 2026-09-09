@@ -39,7 +39,7 @@ public class ProductResponseDto {
 
     private ProductStatus status;
 
-    private Long category;
+    private Long categoryId;
 
     private Integer port;
 }
